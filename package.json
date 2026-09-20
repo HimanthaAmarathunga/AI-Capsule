@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "build": "cd client && npm install && npm run build"
+    "build": "cd client && npm install --include=dev && npm run build"
   },
   "dependencies": {
     "better-sqlite3": "^9.4.3",

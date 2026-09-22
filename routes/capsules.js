@@ -32,12 +32,14 @@ router.post('/', (req, res) => {
   }
 
   try {
+    const melbourneTime = new Date().toLocaleString('sv-SE', { timeZone: 'Australia/Melbourne' }).replace(' ', 'T');
+
     const stmt = db.prepare(`
       INSERT INTO capsules
         (user_id, project_name, prompt_title, prompt_version, prompt_text,
-         response_summary, category, usefulness, reviewed, improved, screenshot_url, notes)
+         response_summary, category, usefulness, reviewed, improved, screenshot_url, notes, created_at)
       VALUES
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     const result = stmt.run(
@@ -52,7 +54,8 @@ router.post('/', (req, res) => {
       reviewed ? 1 : 0,
       improved ? 1 : 0,
       screenshot_url || null,
-      notes || null
+      notes || null,
+      melbourneTime
     );
 
     const newCapsule = db.prepare('SELECT * FROM capsules WHERE id = ?').get(result.lastInsertRowid);

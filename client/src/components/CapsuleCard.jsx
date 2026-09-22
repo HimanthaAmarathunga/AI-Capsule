@@ -39,9 +39,9 @@ export default function CapsuleCard({ capsule, onEdit, onDelete }) {
       {capsule.notes && <p className="text-gray-500 text-xs italic">{capsule.notes}</p>}
       {capsule.screenshot_url && (
         <a href={capsule.screenshot_url} target="_blank" rel="noreferrer"
-          className="text-indigo-400 text-xs underline">View Screenshot</a>
+          className="text-indigo-400 text-xs underline">View Link</a>
       )}
-      <p className="text-gray-700 text-xs">{new Date(capsule.created_at).toLocaleString()}</p>
+      <p className="text-gray-700 text-xs">{new Date(capsule.created_at).toLocaleString('en-AU', { timeZone: 'Australia/Melbourne' })}</p>
     </div>
   );
 }
